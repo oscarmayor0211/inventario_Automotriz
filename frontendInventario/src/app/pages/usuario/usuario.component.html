@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-5 p-3">
+            <form autocomplete="off" [formGroup]="form" (ngSubmit)="createUsuario()">
+                <h4>Crear Usuario</h4>
+                <hr />
+
+                <div class="form-group row">
+                    <div class="col-10">
+                        <input class="form-control" type="hidden" formControlName="id" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Nombre</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" formControlName="nombre_usuario" placeholder="nombre del usuario" [class.is-invalid]="NameInvalid" />
+                        <small *ngIf="NameInvalid" class="text-danger">Ingrese el nombre del usuario</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Edad</label>
+                    <div class="col-10">
+                        <input class="form-control" type="number" formControlName="edad" placeholder="edad del usuario" [class.is-invalid]="NameInvalid" />
+                        <small *ngIf="EdadInvalid" class="text-danger">Ingrese la edad del usuario</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Cedula</label>
+                    <div class="col-10">
+                        <input class="form-control" type="number" formControlName="cedula" placeholder="cedula del usuario" [class.is-invalid]="CedulaInvalid" />
+                        <small *ngIf="CedulaInvalid" class="text-danger">Ingrese la cedula del usuario</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Fecha Ingreso</label>
+                    <div class="col-10">
+                        <input class="form-control" type="date" formControlName="fecha_ingreso" placeholder="nombre del cargo" [class.is-invalid]="FechaInvalid" />
+                        <small *ngIf="FechaInvalid" class="text-danger">Ingrese la fecha de ingreso</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Cargo</label>
+                    <div class="col-10">
+                        <select class="custom-select" formControlName="id_cargo" aria-label="Example select with button addon" [class.is-invalid]="CargoInvalid">
+                <option value="null" selected disabled>
+                  Seleccione un cargo
+                </option>
+                <option *ngFor="let cargo of cargos" value="{{ cargo.id_cargo }}">
+                  {{ cargo.nombre_cargo}}
+                </option>
+              </select>
+                        <small *ngIf="CargoInvalid" class="text-danger">Seleccione un cargo</small
+              >
+            </div>
+          </div>
+  
+        <div class="form-group row">
+          <label class="col-2 col-form-label">&nbsp;</label>
+          <div class="input-group col-md-10">
+            <button type="submit" class="btn btn-outline-primary btn-block">
+              Guardar
+            </button>
+
+            <button (click)="cancel()" class="btn btn-outline-danger btn-block">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-7">
+      <div class="card">
+        <h2 class="card-header text-center">Lista de Usuarios</h2>
+        <p class="card-text">
+          <app-usuario-list
+          [usuarios] = "usuarios"
+          ></app-usuario-list>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

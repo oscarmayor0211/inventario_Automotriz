@@ -1,0 +1,128 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-5 p-3">
+            <form autocomplete="off" [formGroup]="form" (ngSubmit)="createProducto()">
+                <h4>Crear Producto</h4>
+                <hr />
+                <div class="form-group row" [attr.hidden]="state ? '' : null">
+                    <label class="col-5 col-form-label">Seleccione tu usuario</label>
+                    <div class="col-7">
+                        <select class="custom-select" formControlName="id_usuario_modifica" aria-label="Example select with button addon" [class.is-invalid]="ModificaInvalid">
+                      <option value="null" selected disabled>
+                        Seleccione un usuario
+                      </option>
+                      <option *ngFor="let user of usuario" value="{{ user.id_usuario }}">
+                        {{ user.nombre_usuario }}
+                      </option>
+                    </select>
+                        <small *ngIf="ModificaInvalid" class="text-danger">Seleccione un Usuario</small
+                    >
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-10">
+                        <input class="form-control" type="hidden" formControlName="id_producto" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Nombre</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" formControlName="nombre" placeholder="Nombre Producto" [class.is-invalid]="NameInvalid" />
+                        <small *ngIf="NameInvalid" class="text-danger">Ingrese el nombre</small
+            >
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Cantidad</label>
+          <div class="col-10">
+            <input
+              class="form-control"
+              type="number"
+              formControlName="cantidad"
+              placeholder="Cantidad"
+              [class.is-invalid]="CantidadInvalid"
+            />
+            <small *ngIf="CantidadInvalid" class="text-danger"
+              >Ingrese una Cantidad</small
+            >
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Usuarios</label>
+          <div class="col-10">
+            <select
+              class="custom-select"
+              formControlName="id_usuario_registro"
+              aria-label="Example select with button addon"
+              [class.is-invalid]="UsuarioInvalid"
+            >
+              <option value="null" selected disabled>
+                Seleccione un usuario
+              </option>
+              <option *ngFor="let user of usuario" value="{{ user.id_usuario }}">
+                {{ user.nombre_usuario }}
+              </option>
+            </select>
+            <small *ngIf="UsuarioInvalid" class="text-danger"
+              >Seleccione un Usuario</small
+            >
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Fecha Ingreso</label>
+          <div class="col-10">
+            <input
+              class="form-control"
+              type="date"
+              formControlName="fecha_ingreso"
+              placeholder="Fecha Ingreso"
+              [class.is-invalid]="FechaInvalid"
+            />
+            <small *ngIf="FechaInvalid" class="text-danger"
+              >Ingrese una Fecha</small
+            >
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">&nbsp;</label>
+          <div class="input-group col-md-10">
+            <button type="submit" class="btn btn-outline-primary btn-block">
+              Guardar
+            </button>
+          </div>
+        </div>
+      </form>
+      <button
+        type="button"
+        routerLink="/cargos"
+        class="btn btn-primary float-right"
+      >
+        Crear Cargos
+      </button>
+
+      <button
+        type="button"
+        routerLink="/usuarios"
+        class="btn btn-primary float-right mr-2"
+      >
+        Crear Usuarios
+      </button>
+    </div>
+    <div class="col-md-7">
+      <div class="card">
+        <h2 class="card-header text-center">Lista de Productos</h2>
+        <p class="card-text">
+          <app-producto-list
+          [productos] = "productos"
+          (editProducto)="handleEditProducto($event)"
+          (deletProducto)="handleDeleteProducto($event)"
+          ></app-producto-list>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
